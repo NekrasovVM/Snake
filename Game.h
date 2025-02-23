@@ -31,7 +31,11 @@ public:
 
     void update();
 
-    void chooseDifficulty();
+    void selectDifficulty();
 
     void input();
+
+    void start();
+
+    void placeFood();
 };

@@ -27,7 +27,7 @@ Field::~Field(){
     delete [] cells;
 }
 
-void Field::placeFood(unsigned x, unsigned y){
+void Field::renderFood(unsigned x, unsigned y){
     cells[x][y] = '#';
 }
 

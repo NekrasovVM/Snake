@@ -20,12 +20,17 @@ public:
 
     ~Snake();
 
+
     unsigned getxHead(){return xHead;}
     unsigned getyHead(){return yHead;}
 
+    void setState(State st){state = st;}
+
+
+
     bool isTail(unsigned x, unsigned y);
 
-    void move(Snake::State direction);
+    void move();
 
     void cut();
 };

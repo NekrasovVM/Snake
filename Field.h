@@ -11,7 +11,7 @@ public:
 
     ~Field();
 
-    void placeFood(unsigned x, unsigned y);
+    void renderFood(unsigned x, unsigned y);
 
     void print();
 };
