@@ -1,22 +1,22 @@
 #include "Field.h"
 
-#include <iostream>
-using namespace std;
+#include <utility>
+
 
 Field::Field(unsigned w, unsigned h){
 
-    cout << "OK";
-
-    width = w + 2;
-    height = h + 2;
+    width = w;
+    height = h;
 
     cells = new char*[width];
 
     for(int i = 0; i < width; i++){
         cells[i] = new char[height];
+        for(int j = 0; j < height; j++){
+            cells[i][j] = '1';
+        }
     }
 
-    cout << "OK";
 }
 
 Field::~Field(){
@@ -27,14 +27,15 @@ Field::~Field(){
     delete [] cells;
 }
 
-void Field::renderFood(unsigned x, unsigned y){
-    cells[x][y] = '#';
+void Field::setCell(pair<unsigned, unsigned> coord){
+    cells[coord.first][coord.second] = 'o';
 }
 
-void Field::print(){
-    for(int i = 0; i < width; i++) {
-        for(int j = 0; j < height; j++){ 
-            cout << cells[i][j];
-        }
-    }
+void Field::resetCell(pair<unsigned, unsigned> coord){
+    cells[coord.first][coord.second] = '1';
+}
+
+bool Field::isTail(unsigned x, unsigned y){
+    if(cells[x][y] == 'o'){ return true; }
+    else{ return false; }
 }

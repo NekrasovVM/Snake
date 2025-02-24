@@ -1,5 +1,8 @@
 #pragma once
 
+#include <utility>
+using namespace std;
+
 class Field{
 
     unsigned width, height;
@@ -11,7 +14,9 @@ public:
 
     ~Field();
 
-    void renderFood(unsigned x, unsigned y);
+    void setCell(pair<unsigned, unsigned> coord);
 
-    void print();
+    void resetCell(pair<unsigned, unsigned> coord);
+
+    bool isTail(unsigned x, unsigned y);
 };

@@ -14,7 +14,7 @@ Game::Game(unsigned width, unsigned height){
         this->height = height;
 
         // Creation field
-        // field = new Field(width, height);
+        field = new Field(width, height);
 
         // Creating snake with max tail length = size of field in center position
         snake = new Snake(width * height - 1, width / 2, height / 2);
@@ -25,10 +25,14 @@ Game::Game(unsigned width, unsigned height){
         // field->placeFood(xFood, yFood);
 };
 
+Game::~Game(){
+    delete field;
+    delete snake;
+}
+
 void Game::render(){
     system("clear");
 
-    // field->print();
     //top walls
     for(int i = 0; i < width + 2; i++){cout << "-";}
     cout << endl;
@@ -42,7 +46,7 @@ void Game::render(){
                 else { cout << 'O'; }
             }
             else if (i == xFood && j == yFood) { cout << '#'; }
-            else if (snake->isTail(i, j)) { cout << 'o'; }
+            else if(field->isTail(i, j)) { cout << 'o'; }
             else{ cout << ' '; }
         }
         cout << '|' << endl; //right wall
@@ -59,25 +63,28 @@ void Game::render(){
 }
 
 void Game::update(){
-    snake->move();
+    if (snake->getState() != Snake::STOP){
 
-    // if food
-    if(snake->getxHead() != xFood || snake->getyHead() != yFood) { 
-        snake->cut();
-    }
-    else{
-        cout << "food";
-        score++;
-        placeFood();
-    }
+        field->setCell(snake->move());
 
-    // if wall
-    if(snake->getxHead() < 0 || snake->getxHead() == width || snake->getyHead() < 0 || snake->getyHead() == height ||
-        // or tail
-        snake->isTail(snake->getxHead(), snake->getyHead())) {
-            isGameOver = true; 
+        // if food
+        if(snake->getxHead() != xFood || snake->getyHead() != yFood) { 
+            field->resetCell(snake->cut());
+        }
+        else{
+            cout << "food";
+            score++;
+            placeFood();
         }
 
+        // if wall
+        if(snake->getxHead() < 0 || snake->getxHead() == width || snake->getyHead() < 0 || snake->getyHead() == height ||
+            // or tail
+            // snake->isTail(snake->getxHead(), snake->getyHead())) {
+            field->isTail(snake->getxHead(), snake->getyHead())) {
+                isGameOver = true; 
+            }
+    }
     return;
 }
 
@@ -125,18 +132,23 @@ void Game::selectDifficulty(){
 
 int kbhit()
 {
-    struct termios oldt, newt;
+    //structs for old and new parameters of terminal
+    struct termios oldTerm, newTerm;
     int ch;
     int oldf;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+    tcgetattr(0, &oldTerm);
+    newTerm = oldTerm;
+
+    //disable canon input and echo of terminal
+    newTerm.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(0, TCSANOW, &newTerm);
+
+    //set non-block for stdin
+    oldf = fcntl(0, F_GETFL, 0);
+    fcntl(0, F_SETFL, oldf | O_NONBLOCK);
     ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    fcntl(STDIN_FILENO, F_SETFL, oldf);
+    tcsetattr(0, TCSANOW, &oldTerm);
+    fcntl(0, F_SETFL, oldf);
     if (ch != EOF)
     {
         ungetc(ch, stdin);
@@ -210,6 +222,7 @@ void Game::placeFood(){
     do{
         xFood = rand() % width;
         yFood = rand() % height;
-    } while(xFood != snake->getxHead() && yFood != snake->getyHead() && !(snake->isTail(xFood, yFood)));
+    } while(xFood != snake->getxHead() && yFood != snake->getyHead() && !(field->isTail(xFood, yFood)));
+// } while(xFood != snake->getxHead() && yFood != snake->getyHead() && !(snake->isTail(xFood, yFood)));
 }
 

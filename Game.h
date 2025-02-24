@@ -22,10 +22,12 @@ class Game{
 
     Snake* snake;
 
-    // Field* field;
+    Field* field;
 
 public:
     Game(unsigned width, unsigned height);
+
+    ~Game();
 
     void render();
 

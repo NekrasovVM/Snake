@@ -1,4 +1,5 @@
 #include "Snake.h"
+#include <utility>
 
 using namespace std;
 
@@ -9,56 +10,61 @@ Snake::Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead){
 
 Snake::~Snake(){}
 
-bool Snake::isTail(unsigned x, unsigned y){
+// bool Snake::isTail(unsigned x, unsigned y){
 
-    if (xTail.empty()) {
-        return false;
-    }
-    else{
-        for(int i = 0; i < xTail.size(); i++){
-            if(xTail[i] == x && yTail[i] == y){ 
-                return true; 
-            }
-        }
-    }
+//     if (xTail.empty()) {
+//         return false;
+//     }
+//     else{
+//         for(int i = 0; i < xTail.size(); i++){
+//             if(xTail[i] == x && yTail[i] == y){ 
+//                 return true; 
+//             }
+//         }
+//     }
 
-    return false;
-}
+//     return false;
+// }
 
-void Snake::move(){
+pair<unsigned, unsigned> Snake::move(){
+
+    xTail.push_front(xHead);
+    yTail.push_front(yHead);
+
+    pair<unsigned, unsigned> res(xHead, yHead);
 
     switch (state) {
         case LEFT:
-            xTail.push_front(xHead);
-            yTail.push_front(yHead);
             xHead--;
             break;
         case RIGHT:
-            xTail.push_front(xHead);
-            yTail.push_front(yHead);
             xHead++;
             break;
         case UP:
-            xTail.push_front(xHead);
-            yTail.push_front(yHead);
             yHead--;
             break;
         case DOWN:
-            xTail.push_front(xHead);
-            yTail.push_front(yHead);
             yHead++;
             break;
         default:
+            xTail.pop_front();
+            yTail.pop_front();
             break;
     }
+
+    return res;
 }
 
-void Snake::cut(){
+pair<unsigned, unsigned> Snake::cut(){
+
+    pair<unsigned, unsigned> res;
 
     if(state != STOP){
+        res.first = xTail.back();
         xTail.pop_back();
+        res.second = yTail.back();
         yTail.pop_back();
     }
 
-    return;
+    return res;
 }

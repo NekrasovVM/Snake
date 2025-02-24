@@ -1,6 +1,11 @@
 #pragma once
 
 #include <deque>
+#include <ratio>
+#include <utility>
+
+using namespace std;
+
 class Snake{
 
 public:
@@ -25,12 +30,12 @@ public:
     unsigned getyHead(){return yHead;}
 
     void setState(State st){state = st;}
+    State getState() {return state;}
 
 
+    // bool isTail(unsigned x, unsigned y);
 
-    bool isTail(unsigned x, unsigned y);
+    pair<unsigned, unsigned> move();
 
-    void move();
-
-    void cut();
+    pair<unsigned, unsigned> cut();
 };
