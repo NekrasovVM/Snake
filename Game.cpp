@@ -21,8 +21,6 @@ Game::Game(unsigned width, unsigned height){
 
         // Set food coordinates
         placeFood();
-
-        // field->placeFood(xFood, yFood);
 };
 
 Game::~Game(){
