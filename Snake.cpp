@@ -10,22 +10,6 @@ Snake::Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead){
 
 Snake::~Snake(){}
 
-// bool Snake::isTail(unsigned x, unsigned y){
-
-//     if (xTail.empty()) {
-//         return false;
-//     }
-//     else{
-//         for(int i = 0; i < xTail.size(); i++){
-//             if(xTail[i] == x && yTail[i] == y){ 
-//                 return true; 
-//             }
-//         }
-//     }
-
-//     return false;
-// }
-
 pair<unsigned, unsigned> Snake::move(){
 
     xTail.push_front(xHead);

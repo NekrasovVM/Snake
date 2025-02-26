@@ -17,6 +17,7 @@ private:
 
     State state = State::STOP;
 
+    // coordinates of snake segments
     std::deque<unsigned> xTail;
     std::deque<unsigned> yTail;
 
@@ -25,17 +26,14 @@ public:
 
     ~Snake();
 
-
     unsigned getxHead(){return xHead;}
     unsigned getyHead(){return yHead;}
 
     void setState(State st){state = st;}
     State getState() {return state;}
 
-
-    // bool isTail(unsigned x, unsigned y);
-
     pair<unsigned, unsigned> move();
 
+    // delete the oldest segment of snake tail
     pair<unsigned, unsigned> cut();
 };

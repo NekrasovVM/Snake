@@ -70,7 +70,6 @@ void Game::update(){
             field->resetCell(snake->cut());
         }
         else{
-            cout << "food";
             score++;
             placeFood();
         }
@@ -104,29 +103,6 @@ void Game::selectDifficulty(){
             pauseMcs = 1000000;
     }
 }
-
-// bool _kbhit()
-// {
-//     termios term;
-//     tcgetattr(0, &term);
-
-//     unsigned char ch;
-
-//     int nread;
-//     // ioctl(0, FIONREAD, &byteswaiting);
-//     term.c_cc[VMIN]=0;
-//     tcsetattr(0, TCSANOW, &term);
-
-//     cout << "here";
-//     // nread = read(0, &ch, 1);
-
-//     term.c_cc[VMIN]=1;
-//     tcsetattr(0, TCSANOW, &term);
-
-//     cout << nread;
-
-//     return nread > 0;
-// }
 
 int kbhit()
 {
@@ -176,30 +152,11 @@ void Game::input(){
     }
 }
 
-// void setNoncanonMode(){
-//     termios term;
-//     tcgetattr(0, &term);
-//     term.c_cflag &= ~(ICANON | ECHO | ISIG);
-//     term.c_cc[VMIN] = 1;
-//     term.c_cc[VTIME] = 0;
-//     tcsetattr(0, TCSANOW, &term);
-// }
-
-// void setCanonMode(){
-//     termios term;
-//     tcgetattr(0, &term);
-//     term.c_cflag |= ICANON | ECHO;
-//     tcsetattr(0, TCSANOW, &term);
-// }
-
 void Game::start(){
     cout << "Enter your name: ";
     cin >> playerName;
 
     selectDifficulty();
-
-    // setCanonMode();
-    // cout << "canon mode";
 
     while(!isGameOver){
         render();
@@ -211,8 +168,6 @@ void Game::start(){
     render();
     usleep(pauseMcs);
 
-    // setNoncanonMode();
-
     return;
 }
 
@@ -220,7 +175,5 @@ void Game::placeFood(){
     do{
         xFood = rand() % width;
         yFood = rand() % height;
-    } while(xFood != snake->getxHead() && yFood != snake->getyHead() && !(field->isTail(xFood, yFood)));
-// } while(xFood != snake->getxHead() && yFood != snake->getyHead() && !(snake->isTail(xFood, yFood)));
+    } while((xFood == snake->getxHead() && yFood == snake->getyHead()) || field->isTail(xFood, yFood));
 }
-
