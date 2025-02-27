@@ -20,15 +20,15 @@ Field::Field(unsigned w, unsigned h){
 }
 
 Field::~Field(){
-    for(int i = 0; i < width; i++){
-        delete [] cells[i];
-    }
+for(int i = 0; i < width; i++){
+delete [] cells[i];
+}
 
-    delete [] cells;
+delete [] cells;
 }
 
 void Field::setCell(pair<unsigned, unsigned> coord){
-    cells[coord.first][coord.second] = 'o';
+cells[coord.first][coord.second] = 'o';
 }
 
 void Field::resetCell(pair<unsigned, unsigned> coord){

@@ -33,7 +33,7 @@ void Game::render(){
 
     //top walls
     for(int i = 0; i < width + 2; i++){cout << "-";}
-    cout << endl;
+    cout << '\n';
 
     //rendering cycles
     for(int j = 0; j < height; j++){
@@ -47,15 +47,15 @@ void Game::render(){
             else if(field->isTail(i, j)) { cout << 'o'; }
             else{ cout << ' '; }
         }
-        cout << '|' << endl; //right wall
+        cout << "|\n"; //right wall
     }
 
     //bot walls
     for(int i = 0; i < width + 2; i++){cout << "-";}
-    cout << endl;
+    cout << '\n';
 
     //info
-    cout << "Player: " << playerName << "   Score: " << score << endl;
+    cout << "Player: " << playerName << "   Score: " << score << '\n';
 
     return;
 }
@@ -89,7 +89,7 @@ void Game::selectDifficulty(){
     int ch;
     
     do{
-        cout << "Select difficulty:" << endl << "1: easy" << endl << "2: medium" << endl << "3: hard" << endl << "Your choice: ";
+        cout << "Select difficulty:\n1: easy\n2: medium\n3: hard\nYour choice: ";
 
         cin >> ch;
     } while(ch < 1 && ch > 3);

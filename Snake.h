@@ -15,7 +15,7 @@ private:
     // coordinates of snake's head
     int xHead, yHead;
 
-    State state = State::STOP;
+    State state {State::STOP};
 
     // coordinates of snake segments
     std::deque<unsigned> xTail;

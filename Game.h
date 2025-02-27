@@ -14,11 +14,11 @@ class Game{
 
     unsigned xFood, yFood;
 
-    unsigned score = 0;
+    unsigned score {};
 
     unsigned pauseMcs;
 
-    string playerName = "Vovan";
+    string playerName {"Noname"};
 
     Snake* snake;
 

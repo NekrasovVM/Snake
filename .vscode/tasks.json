@@ -5,6 +5,7 @@
             "label": "C++: g++ build files",
             "command": "/usr/bin/g++",
             "args": [
+                "-std=c++20",
                 "-g",
                 "*.cpp",
                 "-o",

@@ -15,7 +15,7 @@ pair<unsigned, unsigned> Snake::move(){
     xTail.push_front(xHead);
     yTail.push_front(yHead);
 
-    pair<unsigned, unsigned> res(xHead, yHead);
+    pair<unsigned, unsigned> res{xHead, yHead};
 
     switch (state) {
         case LEFT:

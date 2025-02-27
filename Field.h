@@ -11,7 +11,7 @@ class Field{
 
     // storage to check is snake tail on cell or not (o - contain tail, 1 - not contain)
     // char because it takes one byte as bool, but more multifunctional
-    char** cells = nullptr;
+    char** cells {nullptr};
 
 public:
     Field(unsigned w, unsigned h);
