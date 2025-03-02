@@ -13,6 +13,7 @@ Field::Field(unsigned w, unsigned h){
     for(int i = 0; i < width; i++){
         cells[i] = new char[height];
         for(int j = 0; j < height; j++){
+            // set all cells as free
             cells[i][j] = '1';
         }
     }
@@ -60,6 +61,7 @@ pair<unsigned, unsigned> Field::getFreeCell(unsigned id){
         }
     }
 
+    // if there were not enough free cells on the field
     throw "Incorrect id!";
     
     return pair<unsigned, unsigned> {0, 0};

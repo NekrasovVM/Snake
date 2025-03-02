@@ -173,10 +173,6 @@ void Game::start(){
 }
 
 void Game::placeFood(){
-    // do{
-    //     xFood = rand() % width;
-    //     yFood = rand() % height;
-    // } while((xFood == snake->getxHead() && yFood == snake->getyHead()) || field->isTail(xFood, yFood));
 
     field->setHead(pair<unsigned, unsigned> {snake->getxHead(), snake->getyHead()});
 

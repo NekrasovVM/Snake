@@ -29,15 +29,21 @@ public:
 
     ~Game();
 
+    // render the field to console
     void render();
 
+    // move snake in the direction and update game objects
     void update();
 
+    // let user to select game difficulty
     void selectDifficulty();
 
+    // get user input to control the snake
     void input();
 
+    // initiate game
     void start();
 
+    // generate new food on the free cell
     void placeFood();
 };

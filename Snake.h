@@ -34,6 +34,7 @@ public:
     void setState(State st){state = st;}
     State getState() {return state;}
 
+    // move snake in the direction and update head and tail
     pair<unsigned, unsigned> move();
 
     // delete the oldest segment of snake tail

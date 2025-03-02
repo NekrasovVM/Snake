@@ -15,6 +15,7 @@ pair<unsigned, unsigned> Snake::move(){
     xTail.push_front(xHead);
     yTail.push_front(yHead);
 
+    // return old coordinates of head to mark this coordinates as tail on field
     pair<unsigned, unsigned> res {xHead, yHead};
 
     switch (state) {
