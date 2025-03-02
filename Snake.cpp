@@ -10,6 +10,12 @@ Snake::Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead){
 
 Snake::~Snake(){}
 
+void Snake::setState(State st){
+    // snake cannot be turned in the opposite direction
+    if((state == UP && st == DOWN) || (state == DOWN && st == UP) || (state == LEFT && st == RIGHT) || (state == RIGHT && st == LEFT)){ return; }
+    else { state = st; }
+}
+
 pair<unsigned, unsigned> Snake::move(){
 
     xTail.push_front(xHead);

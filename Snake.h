@@ -31,7 +31,7 @@ public:
 
     unsigned getTailLen(){return xTail.size();}
 
-    void setState(State st){state = st;}
+    void setState(State st);
     State getState() {return state;}
 
     // move snake in the direction and update head and tail

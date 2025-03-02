@@ -77,7 +77,6 @@ void Game::update(){
         // if wall
         if(snake->getxHead() < 0 || snake->getxHead() == width || snake->getyHead() < 0 || snake->getyHead() == height ||
             // or tail
-            // snake->isTail(snake->getxHead(), snake->getyHead())) {
             field->isTail(snake->getxHead(), snake->getyHead())) {
                 isGameOver = true; 
             }
