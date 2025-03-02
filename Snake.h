@@ -26,8 +26,10 @@ public:
 
     ~Snake();
 
-    unsigned getxHead(){return xHead;}
-    unsigned getyHead(){return yHead;}
+    int getxHead(){return xHead;}
+    int getyHead(){return yHead;}
+
+    unsigned getTailLen(){return xTail.size();}
 
     void setState(State st){state = st;}
     State getState() {return state;}

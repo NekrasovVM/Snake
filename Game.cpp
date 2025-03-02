@@ -166,14 +166,24 @@ void Game::start(){
     }
 
     render();
+    cout << "GAME OVER\n";
     usleep(pauseMcs);
 
     return;
 }
 
 void Game::placeFood(){
-    do{
-        xFood = rand() % width;
-        yFood = rand() % height;
-    } while((xFood == snake->getxHead() && yFood == snake->getyHead()) || field->isTail(xFood, yFood));
+    // do{
+    //     xFood = rand() % width;
+    //     yFood = rand() % height;
+    // } while((xFood == snake->getxHead() && yFood == snake->getyHead()) || field->isTail(xFood, yFood));
+
+    field->setHead(pair<unsigned, unsigned> {snake->getxHead(), snake->getyHead()});
+
+    unsigned id = rand() % (width * height - snake->getTailLen());
+
+    pair<unsigned, unsigned> coordinates = field->getFreeCell(id);
+
+    xFood = coordinates.first;
+    yFood = coordinates.second;
 }

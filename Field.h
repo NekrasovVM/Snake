@@ -18,12 +18,16 @@ public:
 
     ~Field();
 
+    void setHead(pair<unsigned, unsigned> coord);
+
     // mark cell as containing tail segment
-    void setCell(pair<unsigned, unsigned> coord);
+    void setCell(pair<int, int> coord);
 
     // mark cell as notcontaining tail segment
-    void resetCell(pair<unsigned, unsigned> coord);
+    void resetCell(pair<int, int> coord);
 
     // check if cell contain tail segment
-    bool isTail(unsigned x, unsigned y);
+    bool isTail(int x, int y);
+
+    pair<unsigned, unsigned> getFreeCell(unsigned id);
 };

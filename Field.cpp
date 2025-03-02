@@ -27,15 +27,40 @@ delete [] cells[i];
 delete [] cells;
 }
 
-void Field::setCell(pair<unsigned, unsigned> coord){
-cells[coord.first][coord.second] = 'o';
+void Field::setHead(pair<unsigned, unsigned> coord){
+    cells[coord.first][coord.second] = 'O';
 }
 
-void Field::resetCell(pair<unsigned, unsigned> coord){
+void Field::setCell(pair<int, int> coord){
+    if(coord.first < 0 || coord.second < 0) { return; }
+    cells[coord.first][coord.second] = 'o';
+}
+
+void Field::resetCell(pair<int, int> coord){
+    if(coord.first < 0 || coord.second < 0) { return; }
     cells[coord.first][coord.second] = '1';
 }
 
-bool Field::isTail(unsigned x, unsigned y){
+bool Field::isTail(int x, int y){
+    if( x < 0 || y < 0 ) { return false; }
     if(cells[x][y] == 'o'){ return true; }
     else{ return false; }
+}
+
+pair<unsigned, unsigned> Field::getFreeCell(unsigned id){
+    unsigned i{}, j{};
+    unsigned counter{};
+
+    for(i = 0; i < width; i++){
+        for(j = 0; j < height; j++){
+            if(cells[i][j] == '1'){
+                if(counter == id) {return pair<unsigned, unsigned> {i, j};}
+                else {counter++;}
+            }
+        }
+    }
+
+    throw "Incorrect id!";
+    
+    return pair<unsigned, unsigned> {0, 0};
 }
