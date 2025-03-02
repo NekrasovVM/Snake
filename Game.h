@@ -12,7 +12,8 @@ class Game{
 
     unsigned width, height;
 
-    unsigned xFood, yFood;
+    // unsigned xFood, yFood;
+    pair<unsigned, unsigned> food;
 
     unsigned score {};
 

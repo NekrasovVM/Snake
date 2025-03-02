@@ -43,7 +43,8 @@ void Game::render(){
                 if(isGameOver) { cout << 'X'; }
                 else { cout << 'O'; }
             }
-            else if (i == xFood && j == yFood) { cout << '#'; }
+            // else if (i == xFood && j == yFood) { cout << '#'; }
+            else if (i == food.first && j == food.second) { cout << '#'; }
             else if(field->isTail(i, j)) { cout << 'o'; }
             else{ cout << ' '; }
         }
@@ -66,7 +67,7 @@ void Game::update(){
         field->setCell(snake->move());
 
         // if food
-        if(snake->getxHead() != xFood || snake->getyHead() != yFood) { 
+        if(snake->getxHead() != food.first || snake->getyHead() != food.second) { 
             field->resetCell(snake->cut());
         }
         else{
@@ -177,8 +178,10 @@ void Game::placeFood(){
 
     unsigned id = rand() % (width * height - snake->getTailLen());
 
-    pair<unsigned, unsigned> coordinates = field->getFreeCell(id);
+    food = field->getFreeCell(id);
 
-    xFood = coordinates.first;
-    yFood = coordinates.second;
+    // pair<unsigned, unsigned> coordinates = field->getFreeCell(id);
+
+    // xFood = coordinates.first;
+    // yFood = coordinates.second;
 }
