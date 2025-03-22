@@ -2,10 +2,7 @@
 #include <utility>
 
 Snake::Snake(unsigned xHead, unsigned yHead)
-    : xHead{static_cast<int>(xHead)}, yHead{static_cast<int>(yHead)} {
-  // this->xHead = xHead;
-  // this->yHead = yHead;
-}
+    : xHead{static_cast<int>(xHead)}, yHead{static_cast<int>(yHead)} {}
 
 void Snake::setState(State st) {
   // snake cannot be turned in the opposite direction
