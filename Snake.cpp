@@ -1,8 +1,6 @@
 #include "Snake.h"
 #include <utility>
 
-using namespace std;
-
 Snake::Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead) {
   this->xHead = xHead;
   this->yHead = yHead;
@@ -20,13 +18,13 @@ void Snake::setState(State st) {
   }
 }
 
-pair<unsigned, unsigned> Snake::move() {
+std::pair<unsigned, unsigned> Snake::move() {
 
   xTail.push_front(xHead);
   yTail.push_front(yHead);
 
   // return old coordinates of head to mark this coordinates as tail on field
-  pair<unsigned, unsigned> res{xHead, yHead};
+  std::pair<unsigned, unsigned> res{xHead, yHead};
 
   switch (state) {
   case LEFT:
@@ -50,9 +48,9 @@ pair<unsigned, unsigned> Snake::move() {
   return res;
 }
 
-pair<unsigned, unsigned> Snake::cut() {
+std::pair<unsigned, unsigned> Snake::cut() {
 
-  pair<unsigned, unsigned> res;
+  std::pair<unsigned, unsigned> res;
 
   if (state != STOP) {
     res.first = xTail.back();

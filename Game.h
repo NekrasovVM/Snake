@@ -4,7 +4,6 @@
 #include "Snake.h"
 
 #include "iostream"
-using namespace std;
 
 class Game {
 

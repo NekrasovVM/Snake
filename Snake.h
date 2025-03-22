@@ -4,8 +4,6 @@
 #include <ratio>
 #include <utility>
 
-using namespace std;
-
 class Snake {
 
 public:
@@ -35,8 +33,8 @@ public:
   State getState() { return state; }
 
   // move snake in the direction and update head and tail
-  pair<unsigned, unsigned> move();
+  std::pair<unsigned, unsigned> move();
 
   // delete the oldest segment of snake tail
-  pair<unsigned, unsigned> cut();
+  std::pair<unsigned, unsigned> cut();
 };
