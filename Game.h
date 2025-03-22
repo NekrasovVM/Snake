@@ -3,7 +3,8 @@
 #include "Field.h"
 #include "Snake.h"
 
-#include "iostream"
+#include <iostream>
+#include <random>
 
 class Game {
 
@@ -23,6 +24,8 @@ class Game {
   Snake snake;
 
   Field field;
+
+  std::mt19937 engine;
 
 public:
   Game(unsigned width, unsigned height);

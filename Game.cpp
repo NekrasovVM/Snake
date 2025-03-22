@@ -14,6 +14,9 @@ Game::Game(unsigned width, unsigned height)
       // Creating snake with max tail length = size of field in center position
       snake{Snake(width / 2, height / 2)} {
 
+  std::random_device device;
+  engine.seed(device());
+
   // Set food coordinates
   placeFood();
 };
@@ -91,17 +94,17 @@ void Game::selectDifficulty() {
         << "Select difficulty:\n1: easy\n2: medium\n3: hard\nYour choice: ";
 
     std::cin >> ch;
-  } while (ch < 1 && ch > 3);
+  } while (ch < 1 || ch > 3);
 
   switch (ch) {
   case 1:
-    pauseMcs = 330000;
+    pauseMcs = 1000000;
     break;
   case 2:
     pauseMcs = 660000;
     break;
   case 3:
-    pauseMcs = 1000000;
+    pauseMcs = 330000;
     break;
   }
 }
@@ -175,7 +178,10 @@ void Game::placeFood() {
   field.setHead(
       std::pair<unsigned, unsigned>{snake.getxHead(), snake.getyHead()});
 
-  unsigned id = rand() % (width * height - snake.getTailLen());
+  std::uniform_int_distribution<unsigned> distribution(
+      0, width * height - snake.getTailLen() - 1);
+
+  unsigned id = distribution(engine);
 
   food = field.getFreeCell(id);
 }
