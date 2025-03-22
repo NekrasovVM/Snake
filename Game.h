@@ -20,14 +20,12 @@ class Game {
 
   std::string playerName{"Noname"};
 
-  Snake *snake;
+  Snake snake;
 
   Field field;
 
 public:
   Game(unsigned width, unsigned height);
-
-  ~Game();
 
   // render the field to console
   void render();

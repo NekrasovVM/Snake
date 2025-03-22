@@ -20,9 +20,7 @@ private:
   std::deque<unsigned> yTail;
 
 public:
-  Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead);
-
-  ~Snake();
+  Snake(unsigned xHead, unsigned yHead);
 
   int getxHead() { return xHead; }
   int getyHead() { return yHead; }

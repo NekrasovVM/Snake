@@ -1,12 +1,10 @@
 #include "Snake.h"
 #include <utility>
 
-Snake::Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead) {
-  this->xHead = xHead;
-  this->yHead = yHead;
+Snake::Snake(unsigned xHead, unsigned yHead) : xHead{xHead}, yHead{yHead} {
+  // this->xHead = xHead;
+  // this->yHead = yHead;
 }
-
-Snake::~Snake() {}
 
 void Snake::setState(State st) {
   // snake cannot be turned in the opposite direction

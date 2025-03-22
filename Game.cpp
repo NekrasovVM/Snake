@@ -9,18 +9,14 @@
 
 #include <cstdlib>
 
-Game::Game(unsigned width, unsigned height) : field{Field(width, height)} {
-  this->width = width;
-  this->height = height;
-
-  // Creating snake with max tail length = size of field in center position
-  snake = new Snake(width * height - 1, width / 2, height / 2);
+Game::Game(unsigned width, unsigned height)
+    : field{Field(width, height)}, width{width}, height{height},
+      // Creating snake with max tail length = size of field in center position
+      snake{Snake(width / 2, height / 2)} {
 
   // Set food coordinates
   placeFood();
 };
-
-Game::~Game() { delete snake; }
 
 void Game::render() {
   system("clear");
@@ -35,7 +31,7 @@ void Game::render() {
   for (int j = 0; j < height; j++) {
     std::cout << '|'; // left wall
     for (int i = 0; i < width; i++) {
-      if (i == snake->getxHead() && j == snake->getyHead()) {
+      if (i == snake.getxHead() && j == snake.getyHead()) {
         if (isGameOver) {
           std::cout << 'X';
         } else {
@@ -67,23 +63,23 @@ void Game::render() {
 }
 
 void Game::update() {
-  if (snake->getState() != Snake::STOP) {
+  if (snake.getState() != Snake::STOP) {
 
-    field.setCell(snake->move());
+    field.setCell(snake.move());
 
     // if food
-    if (snake->getxHead() != food.first || snake->getyHead() != food.second) {
-      field.resetCell(snake->cut());
+    if (snake.getxHead() != food.first || snake.getyHead() != food.second) {
+      field.resetCell(snake.cut());
     } else {
       score++;
       placeFood();
     }
 
     // if wall
-    if (snake->getxHead() < 0 || snake->getxHead() == width ||
-        snake->getyHead() < 0 || snake->getyHead() == height ||
+    if (snake.getxHead() < 0 || snake.getxHead() == width ||
+        snake.getyHead() < 0 || snake.getyHead() == height ||
         // or tail
-        field.isTail(snake->getxHead(), snake->getyHead())) {
+        field.isTail(snake.getxHead(), snake.getyHead())) {
       isGameOver = true;
     }
   }
@@ -139,16 +135,16 @@ void Game::input() {
   if (kbhit()) {
     switch (getchar()) {
     case 'w':
-      snake->setState(Snake::UP);
+      snake.setState(Snake::UP);
       break;
     case 'a':
-      snake->setState(Snake::LEFT);
+      snake.setState(Snake::LEFT);
       break;
     case 's':
-      snake->setState(Snake::DOWN);
+      snake.setState(Snake::DOWN);
       break;
     case 'd':
-      snake->setState(Snake::RIGHT);
+      snake.setState(Snake::RIGHT);
       break;
     default:
       break;
@@ -179,9 +175,9 @@ void Game::start() {
 void Game::placeFood() {
 
   field.setHead(
-      std::pair<unsigned, unsigned>{snake->getxHead(), snake->getyHead()});
+      std::pair<unsigned, unsigned>{snake.getxHead(), snake.getyHead()});
 
-  unsigned id = rand() % (width * height - snake->getTailLen());
+  unsigned id = rand() % (width * height - snake.getTailLen());
 
   food = field.getFreeCell(id);
 }
