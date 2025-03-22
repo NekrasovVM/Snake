@@ -1,7 +1,8 @@
 #include "Snake.h"
 #include <utility>
 
-Snake::Snake(unsigned xHead, unsigned yHead) : xHead{xHead}, yHead{yHead} {
+Snake::Snake(unsigned xHead, unsigned yHead)
+    : xHead{static_cast<int>(xHead)}, yHead{static_cast<int>(yHead)} {
   // this->xHead = xHead;
   // this->yHead = yHead;
 }

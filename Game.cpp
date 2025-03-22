@@ -99,10 +99,13 @@ void Game::selectDifficulty() {
   switch (ch) {
   case 1:
     pauseMcs = 330000;
+    break;
   case 2:
     pauseMcs = 660000;
+    break;
   case 3:
     pauseMcs = 1000000;
+    break;
   }
 }
 
