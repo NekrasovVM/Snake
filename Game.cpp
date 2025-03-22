@@ -58,8 +58,6 @@ void Game::render() {
 
   // info
   std::cout << "Player: " << playerName << "   Score: " << score << '\n';
-
-  return;
 }
 
 void Game::update() {
@@ -83,7 +81,6 @@ void Game::update() {
       isGameOver = true;
     }
   }
-  return;
 }
 
 void Game::selectDifficulty() {
@@ -171,8 +168,6 @@ void Game::start() {
   render();
   std::cout << "GAME OVER\n";
   usleep(pauseMcs);
-
-  return;
 }
 
 void Game::placeFood() {
