@@ -1,50 +1,50 @@
 #pragma once
 
-#include "Snake.h"
 #include "Field.h"
+#include "Snake.h"
 
 #include "iostream"
 using namespace std;
 
-class Game{
+class Game {
 
-    bool isGameOver = false;
+  bool isGameOver = false;
 
-    unsigned width, height;
+  unsigned width, height;
 
-    // unsigned xFood, yFood;
-    pair<unsigned, unsigned> food;
+  // unsigned xFood, yFood;
+  pair<unsigned, unsigned> food;
 
-    unsigned score {};
+  unsigned score{};
 
-    unsigned pauseMcs;
+  unsigned pauseMcs;
 
-    string playerName {"Noname"};
+  string playerName{"Noname"};
 
-    Snake* snake;
+  Snake *snake;
 
-    Field* field;
+  Field *field;
 
 public:
-    Game(unsigned width, unsigned height);
+  Game(unsigned width, unsigned height);
 
-    ~Game();
+  ~Game();
 
-    // render the field to console
-    void render();
+  // render the field to console
+  void render();
 
-    // move snake in the direction and update game objects
-    void update();
+  // move snake in the direction and update game objects
+  void update();
 
-    // let user to select game difficulty
-    void selectDifficulty();
+  // let user to select game difficulty
+  void selectDifficulty();
 
-    // get user input to control the snake
-    void input();
+  // get user input to control the snake
+  void input();
 
-    // initiate game
-    void start();
+  // initiate game
+  void start();
 
-    // generate new food on the free cell
-    void placeFood();
+  // generate new food on the free cell
+  void placeFood();
 };

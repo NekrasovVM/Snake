@@ -6,37 +6,37 @@
 
 using namespace std;
 
-class Snake{
+class Snake {
 
 public:
-    enum State{STOP = 0, LEFT, RIGHT, UP, DOWN};
+  enum State { STOP = 0, LEFT, RIGHT, UP, DOWN };
 
 private:
-    // coordinates of snake's head
-    int xHead, yHead;
+  // coordinates of snake's head
+  int xHead, yHead;
 
-    State state {State::STOP};
+  State state{State::STOP};
 
-    // coordinates of snake segments
-    std::deque<unsigned> xTail;
-    std::deque<unsigned> yTail;
+  // coordinates of snake segments
+  std::deque<unsigned> xTail;
+  std::deque<unsigned> yTail;
 
 public:
-    Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead);
+  Snake(unsigned maxTailLen, unsigned xHead, unsigned yHead);
 
-    ~Snake();
+  ~Snake();
 
-    int getxHead(){return xHead;}
-    int getyHead(){return yHead;}
+  int getxHead() { return xHead; }
+  int getyHead() { return yHead; }
 
-    unsigned getTailLen(){return xTail.size();}
+  unsigned getTailLen() { return xTail.size(); }
 
-    void setState(State st);
-    State getState() {return state;}
+  void setState(State st);
+  State getState() { return state; }
 
-    // move snake in the direction and update head and tail
-    pair<unsigned, unsigned> move();
+  // move snake in the direction and update head and tail
+  pair<unsigned, unsigned> move();
 
-    // delete the oldest segment of snake tail
-    pair<unsigned, unsigned> cut();
+  // delete the oldest segment of snake tail
+  pair<unsigned, unsigned> cut();
 };
