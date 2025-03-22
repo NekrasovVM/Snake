@@ -7,37 +7,22 @@ Field::Field(unsigned w, unsigned h) {
   width = w;
   height = h;
 
-  cells = new char *[width];
-
-  for (int i = 0; i < width; i++) {
-    cells[i] = new char[height];
-    for (int j = 0; j < height; j++) {
-      // set all cells as free
-      cells[i][j] = '1';
-    }
-  }
+  // initialization cells with '1'
+  cells = std::vector<std::vector<char>>(w, std::vector<char>(h, '1'));
 }
 
-Field::~Field() {
-  for (int i = 0; i < width; i++) {
-    delete[] cells[i];
-  }
-
-  delete[] cells;
-}
-
-void Field::setHead(pair<unsigned, unsigned> coord) {
+void Field::setHead(std::pair<unsigned, unsigned> coord) {
   cells[coord.first][coord.second] = 'O';
 }
 
-void Field::setCell(pair<int, int> coord) {
+void Field::setCell(std::pair<int, int> coord) {
   if (coord.first < 0 || coord.second < 0) {
     return;
   }
   cells[coord.first][coord.second] = 'o';
 }
 
-void Field::resetCell(pair<int, int> coord) {
+void Field::resetCell(std::pair<int, int> coord) {
   if (coord.first < 0 || coord.second < 0) {
     return;
   }
@@ -55,7 +40,7 @@ bool Field::isTail(int x, int y) {
   }
 }
 
-pair<unsigned, unsigned> Field::getFreeCell(unsigned id) {
+std::pair<unsigned, unsigned> Field::getFreeCell(unsigned id) {
   unsigned i{}, j{};
   unsigned counter{};
 
@@ -63,7 +48,7 @@ pair<unsigned, unsigned> Field::getFreeCell(unsigned id) {
     for (j = 0; j < height; j++) {
       if (cells[i][j] == '1') {
         if (counter == id) {
-          return pair<unsigned, unsigned>{i, j};
+          return std::pair<unsigned, unsigned>{i, j};
         } else {
           counter++;
         }
@@ -74,5 +59,5 @@ pair<unsigned, unsigned> Field::getFreeCell(unsigned id) {
   // if there were not enough free cells on the field
   throw "Incorrect id!";
 
-  return pair<unsigned, unsigned>{0, 0};
+  return std::pair<unsigned, unsigned>{0, 0};
 }

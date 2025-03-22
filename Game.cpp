@@ -9,12 +9,9 @@
 
 #include <cstdlib>
 
-Game::Game(unsigned width, unsigned height) {
+Game::Game(unsigned width, unsigned height) : field{Field(width, height)} {
   this->width = width;
   this->height = height;
-
-  // Creation field
-  field = new Field(width, height);
 
   // Creating snake with max tail length = size of field in center position
   snake = new Snake(width * height - 1, width / 2, height / 2);
@@ -23,51 +20,48 @@ Game::Game(unsigned width, unsigned height) {
   placeFood();
 };
 
-Game::~Game() {
-  delete field;
-  delete snake;
-}
+Game::~Game() { delete snake; }
 
 void Game::render() {
   system("clear");
 
   // top walls
   for (int i = 0; i < width + 2; i++) {
-    cout << "-";
+    std::cout << "-";
   }
-  cout << '\n';
+  std::cout << '\n';
 
   // rendering cycles
   for (int j = 0; j < height; j++) {
-    cout << '|'; // left wall
+    std::cout << '|'; // left wall
     for (int i = 0; i < width; i++) {
       if (i == snake->getxHead() && j == snake->getyHead()) {
         if (isGameOver) {
-          cout << 'X';
+          std::cout << 'X';
         } else {
-          cout << 'O';
+          std::cout << 'O';
         }
       }
-      // else if (i == xFood && j == yFood) { cout << '#'; }
+      // else if (i == xFood && j == yFood) { std::cout << '#'; }
       else if (i == food.first && j == food.second) {
-        cout << '#';
-      } else if (field->isTail(i, j)) {
-        cout << 'o';
+        std::cout << '#';
+      } else if (field.isTail(i, j)) {
+        std::cout << 'o';
       } else {
-        cout << ' ';
+        std::cout << ' ';
       }
     }
-    cout << "|\n"; // right wall
+    std::cout << "|\n"; // right wall
   }
 
   // bot walls
   for (int i = 0; i < width + 2; i++) {
-    cout << "-";
+    std::cout << "-";
   }
-  cout << '\n';
+  std::cout << '\n';
 
   // info
-  cout << "Player: " << playerName << "   Score: " << score << '\n';
+  std::cout << "Player: " << playerName << "   Score: " << score << '\n';
 
   return;
 }
@@ -75,11 +69,11 @@ void Game::render() {
 void Game::update() {
   if (snake->getState() != Snake::STOP) {
 
-    field->setCell(snake->move());
+    field.setCell(snake->move());
 
     // if food
     if (snake->getxHead() != food.first || snake->getyHead() != food.second) {
-      field->resetCell(snake->cut());
+      field.resetCell(snake->cut());
     } else {
       score++;
       placeFood();
@@ -89,7 +83,7 @@ void Game::update() {
     if (snake->getxHead() < 0 || snake->getxHead() == width ||
         snake->getyHead() < 0 || snake->getyHead() == height ||
         // or tail
-        field->isTail(snake->getxHead(), snake->getyHead())) {
+        field.isTail(snake->getxHead(), snake->getyHead())) {
       isGameOver = true;
     }
   }
@@ -100,9 +94,10 @@ void Game::selectDifficulty() {
   int ch;
 
   do {
-    cout << "Select difficulty:\n1: easy\n2: medium\n3: hard\nYour choice: ";
+    std::cout
+        << "Select difficulty:\n1: easy\n2: medium\n3: hard\nYour choice: ";
 
-    cin >> ch;
+    std::cin >> ch;
   } while (ch < 1 && ch > 3);
 
   switch (ch) {
@@ -162,8 +157,8 @@ void Game::input() {
 }
 
 void Game::start() {
-  cout << "Enter your name: ";
-  cin >> playerName;
+  std::cout << "Enter your name: ";
+  std::cin >> playerName;
 
   selectDifficulty();
 
@@ -175,7 +170,7 @@ void Game::start() {
   }
 
   render();
-  cout << "GAME OVER\n";
+  std::cout << "GAME OVER\n";
   usleep(pauseMcs);
 
   return;
@@ -183,15 +178,10 @@ void Game::start() {
 
 void Game::placeFood() {
 
-  field->setHead(
-      pair<unsigned, unsigned>{snake->getxHead(), snake->getyHead()});
+  field.setHead(
+      std::pair<unsigned, unsigned>{snake->getxHead(), snake->getyHead()});
 
   unsigned id = rand() % (width * height - snake->getTailLen());
 
-  food = field->getFreeCell(id);
-
-  // pair<unsigned, unsigned> coordinates = field->getFreeCell(id);
-
-  // xFood = coordinates.first;
-  // yFood = coordinates.second;
+  food = field.getFreeCell(id);
 }

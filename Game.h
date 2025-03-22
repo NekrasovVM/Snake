@@ -12,17 +12,17 @@ class Game {
   unsigned width, height;
 
   // unsigned xFood, yFood;
-  pair<unsigned, unsigned> food;
+  std::pair<unsigned, unsigned> food;
 
   unsigned score{};
 
   unsigned pauseMcs;
 
-  string playerName{"Noname"};
+  std::string playerName{"Noname"};
 
   Snake *snake;
 
-  Field *field;
+  Field field;
 
 public:
   Game(unsigned width, unsigned height);
