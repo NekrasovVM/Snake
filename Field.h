@@ -11,7 +11,6 @@ class Field {
 
   // storage to check is snake tail on cell or not (o - contain tail, O -
   // contain head, 1 - free cell)
-  // char **cells{nullptr};
   std::vector<std::vector<char>> cells;
 
 public:

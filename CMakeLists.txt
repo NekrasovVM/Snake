@@ -9,5 +9,4 @@ configure_file(SnakeConfig.h.in SnakeConfig.h)
 
 add_executable(Snake main.cpp Field.cpp  Game.cpp Snake.cpp)
 
-# TODO 9: Use target_include_directories to include ${PROJECT_BINARY_DIR}
 target_include_directories(Snake PUBLIC "${PROJECT_BINARY_DIR}")

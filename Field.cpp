@@ -4,14 +4,7 @@
 
 Field::Field(unsigned w, unsigned h)
     : width{w}, height{h},
-      cells{std::vector<std::vector<char>>(w, std::vector<char>(h, '1'))} {
-
-  // width = w;
-  // height = h;
-
-  // // initialization cells with '1'
-  // cells = std::vector<std::vector<char>>(w, std::vector<char>(h, '1'));
-}
+      cells{std::vector<std::vector<char>>(w, std::vector<char>(h, '1'))} {}
 
 void Field::setHead(std::pair<unsigned, unsigned> coord) {
   cells[coord.first][coord.second] = 'O';
