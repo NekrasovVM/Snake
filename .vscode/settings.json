@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "cstdlib": "cpp"
+    },
+    "clang-format.executable": "/usr/lib/llvm-18/bin/clang-format"
 }
